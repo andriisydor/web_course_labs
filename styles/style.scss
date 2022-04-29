@@ -96,22 +96,23 @@ html {
     h1 {
       color: $special;
       margin-top: 0;
-      font-size: 80px;
+      font-size: 8vw;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      padding-top: 10px;
     }
   
     h2 {
       @extend h1;
       padding-top: 10px;
-      font-size: 40px;
+      font-size: 6vw;
       margin-bottom: 0;
     }
   
     h3 {
       @extend h1;
-      font-size: 20px;
+      font-size: 3vw;
     }
   
     input.search:active {
@@ -327,16 +328,6 @@ html {
       width: 100%;
       max-width: none;
     }
-  
-    .mainpart {
-      h1 {
-        font-size: 30px;
-      }
-  
-      h2 {
-        font-size: 20px;
-      }
-    }
   }
   
   @media screen and (max-width: 300px) {
@@ -344,15 +335,7 @@ html {
       overflow: scroll;
     }
   
-    .mainpart h1 {
-      font-size: 30px;
-    }
-  
     .object img, .forminput img, .squarediv {
       display: none;
-    }
-  
-    .mainpart h2 {
-      font-size: 10px;
     }
   }
