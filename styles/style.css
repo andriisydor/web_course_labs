@@ -87,7 +87,7 @@ body {
 .mainpart h1, .mainpart h2, .mainpart h3 {
   color: #B6CDB1;
   margin-top: 0;
-  font-size: 90px;
+  font-size: 80px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
