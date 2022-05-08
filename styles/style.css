@@ -280,6 +280,29 @@ body {
   color: #F0F6F7;
 }
 
+.alert {
+  padding: 20px;
+  background-color: #e33d3d;
+  color: #F0F6F7;
+  display: none;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: #F0F6F7;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+
 @media screen and (max-width: 700px) {
   .sidebar {
     width: 100%;

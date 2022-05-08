@@ -292,6 +292,28 @@ html {
     font-size: 20px;
     color: $main;
   }
+
+  .alert {
+    padding: 20px;
+    background-color: $danger;
+    color: $main;
+    display: none;
+  }
+  
+  .closebtn {
+    margin-left: 15px;
+    color: $main;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      color: $dark2;
+    }
+  }
   
   @media screen and (max-width: 700px) {
     .sidebar {
