@@ -29,11 +29,9 @@ function loginIntoPlayer() {
                 localStorage.removeItem('id');
             }
         })
-        .catch(error => {
-            // const mute = error; 
+        .catch(error => { 
             localStorage.removeItem('token');
             localStorage.removeItem('id');
-            // console.log(`Fetch error: ${error}`);
             showErrorMessage(error);
         });
 };

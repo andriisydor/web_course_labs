@@ -15,7 +15,7 @@ function registerIntoPlayer() {
         })
         .then((response) => {
             if (!response.ok) {
-                throw Error(response.status);
+                throw Error(response.statusText);
             } else {
                 return(response.json());
             }
@@ -31,15 +31,30 @@ function registerIntoPlayer() {
             }
         })
         .catch(error => {
-            // const mute = error; 
             localStorage.removeItem('token');
             localStorage.removeItem('id');
-            console.log(`Fetch error: ${error}`);
+            showErrorMessage(error);
         });
-}
+};
 
 
 function clearTokenAndId() {
     localStorage.removeItem('token');
     localStorage.removeItem('id');
-}
+};
+
+
+function closeErrorMessage() {
+    document.querySelector(".alert").style.display="none";
+    document.querySelector(".objectholder").style.display="block";
+};
+
+
+function showErrorMessage(error) {
+    let errorMessage = document.querySelector(".alert");
+    errorMessage.innerHTML = `<span class="closebtn">&times;</span> 
+                            <strong>Error!</strong> ${error}`;
+    errorMessage.style.display='block';
+    document.querySelector(".objectholder").style.display="none";
+    document.querySelector(".closebtn").addEventListener("click", closeErrorMessage);
+};
