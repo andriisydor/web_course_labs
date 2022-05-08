@@ -2,6 +2,7 @@ let registerForm = document.getElementById("register-form");
 document.querySelector(".enter").addEventListener("click", registerIntoPlayer);
 const server = "http://127.0.0.1:5000";
 
+clearTokenAndId();
 
 function registerIntoPlayer() {
     fetch(`${server}/user`, {
@@ -35,4 +36,10 @@ function registerIntoPlayer() {
             localStorage.removeItem('id');
             console.log(`Fetch error: ${error}`);
         });
+}
+
+
+function clearTokenAndId() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('id');
 }

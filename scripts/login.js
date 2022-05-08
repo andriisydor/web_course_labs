@@ -2,6 +2,7 @@ let loginForm = document.getElementById("login-form");
 document.querySelector(".enter").addEventListener("click", loginIntoPlayer);
 const server = "http://127.0.0.1:5000";
 
+clearTokenAndId();
 
 function loginIntoPlayer() {
     fetch(`${server}/user/login`, {
@@ -34,4 +35,10 @@ function loginIntoPlayer() {
             localStorage.removeItem('id');
             console.log(`Fetch error: ${error}`);
         });
+}
+
+
+function clearTokenAndId() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('id');
 }

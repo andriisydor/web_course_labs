@@ -1,6 +1,7 @@
 let objectHolder = document.querySelector(".objectholder");
 const server = "http://127.0.0.1:5000";
 
+checkIfLogin();
 loadPlaylistForUser();
 
 function loadPlaylistForUser() {
@@ -40,4 +41,13 @@ function loadPlaylistForUser() {
             // const mute = error; 
             console.log(`Fetch error: ${error}`);
         });
+}
+
+
+function checkIfLogin() {
+    const token = localStorage.getItem('token');
+    const id = localStorage.getItem('id');
+    if (!token || !id) {
+        window.location.replace("./login.html");
+    }
 }
