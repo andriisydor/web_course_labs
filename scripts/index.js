@@ -8,6 +8,20 @@ function checkIfLogin() {
     }
 }
 
+function closeErrorMessage() {
+    document.querySelector('.alert').style.display = 'none';
+    document.querySelector('.objectholder').style.display = 'block';
+}
+
+function showErrorMessage(error) {
+    const errorMessage = document.querySelector('.alert');
+    errorMessage.innerHTML = `<span class="closebtn">&times;</span> 
+                            <strong>Error!</strong> ${error}`;
+    errorMessage.style.display = 'block';
+    document.querySelector('.objectholder').style.display = 'none';
+    document.querySelector('.closebtn').addEventListener('click', closeErrorMessage);
+}
+
 function loadPlaylistForUser() {
     fetch(`${server}/service/users/${localStorage.getItem('id')}`, {
         method: 'GET',
@@ -35,14 +49,10 @@ function loadPlaylistForUser() {
                                     </div>`;
                 }
                 document.querySelector('.objectholder').innerHTML = playlists;
-            } else {
-                // error message
-                console.log('no playlists');
             }
         })
         .catch((error) => {
-            // error message
-            console.log(`Fetch error: ${error}`);
+            showErrorMessage(error);
         });
 }
 
