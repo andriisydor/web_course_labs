@@ -1,29 +1,31 @@
-let objectHolder = document.querySelector(".objectholder");
-const server = "http://127.0.0.1:5000";
+const server = 'http://127.0.0.1:5000';
 
-checkIfLogin();
-loadPlaylistForUser();
+function checkIfLogin() {
+    const token = localStorage.getItem('token');
+    const id = localStorage.getItem('id');
+    if (!token || !id) {
+        window.location.replace('./login.html');
+    }
+}
 
 function loadPlaylistForUser() {
     fetch(`${server}/service/users/${localStorage.getItem('id')}`, {
         method: 'GET',
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('token')
-        }})
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+    })
         .then((response) => {
             if (!response.ok) {
-                throw Error(response.status);
+                throw Error(response.statusText);
             } else {
-                return(response.json());
+                return response.json();
             }
         })
         .then((data) => {
-            if (data.length > 0 && data[0].hasOwnProperty('id')){
-                console.log(data);
-                console.log(data[0]);
-                console.log(data[0].title);
-                let playlists = "";
-                for (let i = 0; i < data.length; i++){
+            if (data.length > 0 && Object.prototype.hasOwnProperty.call(data[0], 'id')) {
+                let playlists = '';
+                for (let i = 0; i < data.length; i += 1) {
                     playlists += `<div class="object">
                                         <div class="squarediv"></div>
                                         <div class="text">
@@ -32,21 +34,17 @@ function loadPlaylistForUser() {
                                         </div>
                                     </div>`;
                 }
-                document.querySelector(".objectholder").innerHTML = playlists;
+                document.querySelector('.objectholder').innerHTML = playlists;
             } else {
-                console.log("no playlists");
+                // error message
+                console.log('no playlists');
             }
         })
-        .catch(error => {
+        .catch((error) => {
+            // error message
             console.log(`Fetch error: ${error}`);
         });
 }
 
-
-function checkIfLogin() {
-    const token = localStorage.getItem('token');
-    const id = localStorage.getItem('id');
-    if (!token || !id) {
-        window.location.replace("./login.html");
-    }
-}
+checkIfLogin();
+loadPlaylistForUser();
