@@ -28,7 +28,7 @@ function loadPlaylistForUser() {
                                         <div class="squarediv"></div>
                                         <div class="text">
                                             <a href="#play"><span class="name"> ${data[i].title} </span></a>
-                                            <span class="artist"> ${data[i].user_id} </span>
+                                            <span class="artist"> ${data[i].user.username} </span>
                                         </div>
                                     </div>`;
                 }
@@ -38,7 +38,6 @@ function loadPlaylistForUser() {
             }
         })
         .catch(error => {
-            // const mute = error; 
             console.log(`Fetch error: ${error}`);
         });
 }
