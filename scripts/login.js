@@ -32,7 +32,12 @@ function loginIntoPlayer() {
         }),
     })
         .then((response) => {
-            if (!response.ok) {
+            if (response.status > 300 && (response.status < 400 || response.status > 410)) {
+                throw Error(response.statusText);
+            } else if (!response.ok) {
+                response.json().then((data) => {
+                    showErrorMessage(data.message);
+                });
                 throw Error(response.statusText);
             } else {
                 return response.json();
