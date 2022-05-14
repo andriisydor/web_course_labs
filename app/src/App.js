@@ -3,7 +3,7 @@ import Navbar from './Navbar';
 
 class App extends Component {
   state = {  } 
-  render() { 
+  render() {
     return (
       <React.Fragment>
         <Navbar />
