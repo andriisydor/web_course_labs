@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 class Navbar extends Component {
     render() { 
         return (
-            <div class="sidebar">
+            <div className="sidebar">
                 <Link to="/">PLAYLISTS</Link>
                 <Link to="/">SONGS</Link>
                 <Link to="/">LIBRARY</Link>
