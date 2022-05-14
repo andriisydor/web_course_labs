@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import Navbar from './Navbar';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {  } 
+  render() { 
+    return (
+      <React.Fragment>
+        <Navbar />
+        <div className="mainpart moveaside">
+          <h1>playlists</h1>
+          <div className="alert"></div>
+          <form className="search-form">
+            <input className="search" type="text" placeholder="search..." name="search"></input>
+            <button className="search-button" type="submit">&#x3e;</button>
+          </form>
+          <div className="objectholder">
+          </div>
+        </div>
+      </React.Fragment>
+    );
+  }
 }
-
+ 
 export default App;
