@@ -71,7 +71,7 @@ function Login() {
                     <input name="username" onChange={handleChangeUsername} placeholder="username" className="forminput"></input>
                     <input name="password" onChange={handleChangePassword} placeholder="password" className="forminput" type="password">
                     </input>
-                    <Link to="/" className="forget"><span>Don`t have account?</span></Link>
+                    <Link to="/registration" className="forget"><span>Don`t have account?</span></Link>
                     <input onClick={logginAttempt} className="enter" type="button" value="submit">
                     </input>
                 </form>
