@@ -1,37 +1,21 @@
-import React, { Component } from 'react';
-import Navbar from './Navbar';
-import { Navigate } from 'react-router-dom';
+import React from 'react';
+// import { useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from './Login';
+import Main from './Main';
 
-class App extends Component {
-  state = { 
-    token: localStorage.getItem('token'),
-    id: localStorage.getItem('id')
-   } 
-  
-  checkIfLogged() {
-    if (this.state.token == null){
-      return <Navigate to="/login" />;
-    }
-  }
-  
-  render() {
-    return (
-      <React.Fragment>
-        {this.checkIfLogged()}
-        <Navbar />
-        <div className="mainpart moveaside">
-          <h1>playlists</h1>
-          <div className="alert"></div>
-          <form className="search-form">
-            <input className="search" type="text" placeholder="search..." name="search"></input>
-            <button className="search-button" type="submit">&#x3e;</button>
-          </form>
-          <div className="objectholder">
-          </div>
-        </div>
-      </React.Fragment>
-    );
-  }
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" >
+          <Route index element={<Main />} />
+          <Route path="login" element={<Login />} />
+          <Route path="blog" element={<Main />} />
+        </Route>
+      </Routes>
+  </BrowserRouter>
+  );
 }
  
 export default App;
