@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    // const [error, setError] = useState(false);
+    const [error1, setError] = useState(false);
+    const [resultMessage, setResultMessage] = useState('');
 
     let cancelLoggin = () => {
         localStorage.removeItem('token');
@@ -28,6 +29,17 @@ function Login() {
 
     let navigate = useNavigate();
 
+    const showError = () => {
+        if (error1) {
+            return(
+                <React.Fragment>
+                    <span className="closebtn">&times;</span> 
+                    <strong>Error! {resultMessage.message} </strong>
+                </React.Fragment>
+            );
+        } 
+    }
+
     const logginAttempt = () => {
         fetch("http://127.0.0.1:5000/user/login", {
             method: 'POST',
@@ -39,7 +51,17 @@ function Login() {
                 password: password,
             }),
         })
-          .then(res => res.json())
+          .then(res => {
+                console.log(res);
+                console.log(res.status);
+                console.log(res.statusText);
+                if (res.status != 200) {
+                    console.log('setttt');
+                    setError(true);
+                    console.log(error1);
+                }
+                return res.json();
+        })
           .then(
             (result) => {
                 console.log(username);
@@ -47,7 +69,13 @@ function Login() {
                 localStorage.setItem('token', result.token);
                 localStorage.setItem('id', result.id);
                 // window.location.href='/';
-                navigate("/");
+                setResultMessage(result);
+                if (!error1){
+                    console.log(error1);
+                    console.log(!error1);
+                    console.log('123');
+                    navigate("/");
+                }
             },
             // Примітка: важливо обробляти помилки саме тут,
             // а не в блоці catch (), щоб не перехоплювати
@@ -56,7 +84,7 @@ function Login() {
             //   this.setState({
             //     error: true
             //   });
-                console.log('error');
+                console.log(error);
             }
           )
       }
@@ -65,7 +93,9 @@ function Login() {
     return (
         <div className="mainpart">
             <h1>login</h1>
-            <div className="alert"></div>
+            <div className="alert">
+                {showError()}
+            </div>
             <div className="objectholder">
                 <form id="login-form">
                     <input name="username" onChange={handleChangeUsername} placeholder="username" className="forminput"></input>
