@@ -102,6 +102,38 @@ function Edit() {
             }
           )
       }
+
+    const handleDeleteAttempt = () => {
+        fetch(`http://127.0.0.1:5000/user/${localStorage.getItem('id')}`, {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        })
+          .then(res => {
+                if (res.status !== 200) {
+                    setError(true);
+                    return res.json();
+                } else {
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('id');
+                    navigate('/login');
+                    return {};
+                }
+        })
+          .then(
+            (result) => {
+                if ('message' in result || 'msg' in result){
+                    setResultMessage(result);
+                }
+            },
+            (error) => {
+                setError(true);
+                setResultMessage(error);
+            }
+          )
+    }
+    
     if (!error1){
         getUserData();
     }
@@ -122,7 +154,7 @@ function Edit() {
                 </form>
 
                 <form>
-                    <input className="enter" type="button" value="delete"></input>
+                    <input onClick={handleDeleteAttempt} className="enter" type="button" value="delete"></input>
                 </form>
             </div>
         </div>
