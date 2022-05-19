@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-
-function Error() {
+function Error(props) {
     return (
-        <div>
+        <div className="alert-shown">
+            <span className="closebtn" onClick={props.handleCloseClick}>&times;</span> 
+            <strong>Error!</strong> {props.message}
         </div>
     );
 }

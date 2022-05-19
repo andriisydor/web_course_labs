@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
+import Error from './Error';
 import { useNavigate } from "react-router-dom";
 
 function Login() {
@@ -27,16 +28,16 @@ function Login() {
         setPassword(event.target.value);
     }
 
+    const handleCloseClick = () => {
+        setError(false);
+        setResultMessage('');
+    }
+
     let navigate = useNavigate();
 
     const showError = () => {
         if (error1) {
-            return(
-                <React.Fragment>
-                    <span className="closebtn">&times;</span> 
-                    <strong>Error! {resultMessage.message} </strong>
-                </React.Fragment>
-            );
+            return(<Error handleCloseClick={handleCloseClick} message={resultMessage.message}/>);
         } 
     }
 
@@ -52,28 +53,20 @@ function Login() {
             }),
         })
           .then(res => {
-                console.log(res);
-                console.log(res.status);
-                console.log(res.statusText);
-                if (res.status != 200) {
-                    console.log('setttt');
+                if (res.status !== 200) {
                     setError(true);
-                    console.log(error1);
                 }
                 return res.json();
         })
           .then(
             (result) => {
-                console.log(username);
-                console.log(result);
                 localStorage.setItem('token', result.token);
                 localStorage.setItem('id', result.id);
                 // window.location.href='/';
                 setResultMessage(result);
-                if (!error1){
-                    console.log(error1);
-                    console.log(!error1);
-                    console.log('123');
+                if ('message' in result){
+                    console.log(result.message);
+                } else {
                     navigate("/");
                 }
             },
@@ -84,6 +77,7 @@ function Login() {
             //   this.setState({
             //     error: true
             //   });
+                console.log('=== catch ===');
                 console.log(error);
             }
           )
@@ -93,9 +87,7 @@ function Login() {
     return (
         <div className="mainpart">
             <h1>login</h1>
-            <div className="alert">
-                {showError()}
-            </div>
+            {showError()}
             <div className="objectholder">
                 <form id="login-form">
                     <input name="username" onChange={handleChangeUsername} placeholder="username" className="forminput"></input>

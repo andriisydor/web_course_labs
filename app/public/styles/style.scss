@@ -300,6 +300,14 @@ html {
     display: none;
     margin-bottom: 20px;
   }
+
+  .alert-shown {
+    padding: 20px;
+    background-color: $danger;
+    color: $main;
+    display: block;
+    margin-bottom: 20px;
+  }
   
   .closebtn {
     margin-left: 15px;

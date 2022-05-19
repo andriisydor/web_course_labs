@@ -288,6 +288,14 @@ body {
   margin-bottom: 20px;
 }
 
+.alert-shown {
+  padding: 20px;
+  background-color: #e33d3d;
+  color: #F0F6F7;
+  display: block;
+  margin-bottom: 20px;
+}
+
 .closebtn {
   margin-left: 15px;
   color: #F0F6F7;
