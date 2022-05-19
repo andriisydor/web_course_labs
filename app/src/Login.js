@@ -14,12 +14,6 @@ function Login() {
         localStorage.removeItem('id');
     }
 
-    // logginAttempt = () => {
-    //     // localStorage.setItem('token', '123');
-    //     // localStorage.setItem('id', '1');
-    //     console.log('login attempt!');
-    // }
-
     const handleChangeUsername = (event) => {
         setUsername(event.target.value);
     }
@@ -62,23 +56,15 @@ function Login() {
             (result) => {
                 localStorage.setItem('token', result.token);
                 localStorage.setItem('id', result.id);
-                // window.location.href='/';
-                setResultMessage(result);
                 if ('message' in result){
-                    console.log(result.message);
+                    setResultMessage(result);
                 } else {
                     navigate("/");
                 }
             },
-            // Примітка: важливо обробляти помилки саме тут,
-            // а не в блоці catch (), щоб не перехоплювати
-            // виключення з помилок в самих компонентах.
             (error) => {
-            //   this.setState({
-            //     error: true
-            //   });
-                console.log('=== catch ===');
-                console.log(error);
+                setError(true);
+                setResultMessage(error);
             }
           )
       }

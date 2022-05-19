@@ -4,7 +4,7 @@ import  { Navigate } from 'react-router-dom';
 
 function Main() {
     const [token] = useState(localStorage.getItem('token'));
-    const [id] = useState(localStorage.getItem('id'));
+    // const [id] = useState(localStorage.getItem('id'));
 
     if (token == null) {
         return <Navigate to='/login' />;
