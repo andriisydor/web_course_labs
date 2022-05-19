@@ -54,11 +54,11 @@ function Login() {
         })
           .then(
             (result) => {
-                localStorage.setItem('token', result.token);
-                localStorage.setItem('id', result.id);
                 if ('message' in result){
                     setResultMessage(result);
                 } else {
+                    localStorage.setItem('token', result.token);
+                    localStorage.setItem('id', result.id);
                     navigate("/");
                 }
             },
