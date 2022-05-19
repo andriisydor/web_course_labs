@@ -61,7 +61,7 @@ function Registration() {
         })
           .then(
             (result) => {
-                if ('message' in result){
+                if ('message' in result || 'msg' in result){
                     setResultMessage(result);
                 } else {
                     localStorage.setItem('token', result.token);
