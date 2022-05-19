@@ -9,7 +9,7 @@ function Navbar() {
             <Link to="/">LIBRARY</Link>
             <Link to="/">CREATE PLAYLIST</Link>
             <Link to="/login">LOGOUT</Link>
-            <Link to="/">EDIT ACCOUNT</Link>
+            <Link to="/edit">EDIT ACCOUNT</Link>
         </div>
     );
 }
