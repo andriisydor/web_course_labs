@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
 import Object from './Object';
 import { useNavigate } from "react-router-dom";
+import Error from './Error';
 
 function Edit() {
     const [username, setUsername] = useState('');
@@ -142,12 +143,24 @@ function Edit() {
             getUserData();
         }
     }, [username, email, error1]);
+
+    const handleCloseClick = () => {
+        setError(false);
+        setResultMessage('');
+    }
+
+    const showError = () => {
+        if (error1) {
+            return(<Error handleCloseClick={handleCloseClick} message={resultMessage.message}/>);
+        } 
+    }
     
     return ( 
         <React.Fragment>
         <Navbar />
         <div className="mainpart moveaside">
             <h1>editing</h1>
+            {showError()}
             <div className="objectholder">
                 <Object name={'username: ' + username} title = {'email: ' + email}/>
                 <form>
