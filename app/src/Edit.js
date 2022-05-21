@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
 import Object from './Object';
 import { useNavigate } from "react-router-dom";
@@ -38,7 +38,6 @@ function Edit() {
         if (newPassword !== ''){
             result.password = newPassword;
         }
-        console.log(result);
         return JSON.stringify(result);
     }
 
@@ -54,6 +53,8 @@ function Edit() {
           .then(res => {
                 if (res.status !== 200) {
                     setError(true);
+                } else {
+                    setError(false);
                 }
                 return res.json();
         })
@@ -64,6 +65,7 @@ function Edit() {
                 } else {
                     localStorage.setItem('token', result.token);
                     localStorage.setItem('id', result.id);
+                    setUsername('');
                     navigate('/edit');
                 }
             },
@@ -73,35 +75,6 @@ function Edit() {
             }
           )
     }
-
-    const getUserData = () => {
-        fetch("http://127.0.0.1:5000/user", {
-            method: 'GET',
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-        })
-          .then(res => {
-                if (res.status !== 200) {
-                    setError(true);
-                }
-                return res.json();
-        })
-          .then(
-            (result) => {
-                if ('message' in result || 'msg' in result){
-                    setResultMessage(result);
-                } else if ('username' in result && 'email' in result){
-                    setUsername(result.username);
-                    setEmail(result.email);
-                }
-            },
-            (error) => {
-                setError(true);
-                setResultMessage(error);
-            }
-          )
-      }
 
     const handleDeleteAttempt = () => {
         fetch(`http://127.0.0.1:5000/user/${localStorage.getItem('id')}`, {
@@ -133,10 +106,42 @@ function Edit() {
             }
           )
     }
-    
-    if (!error1){
-        getUserData();
-    }
+
+    useEffect(() => {
+        const getUserData = () => {
+            fetch("http://127.0.0.1:5000/user", {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+            })
+              .then(res => {
+                    if (res.status !== 200) {
+                        setError(true);
+                    }
+                    return res.json();
+            })
+              .then(
+                (result) => {
+                    if ('message' in result || 'msg' in result){
+                        setResultMessage(result);
+                    } else if ('username' in result && 'email' in result){
+                        if (result.username !== username || result.email !== email){
+                            setUsername(result.username);
+                            setEmail(result.email);
+                        }
+                    }
+                },
+                (error) => {
+                    setError(true);
+                    setResultMessage(error);
+                }
+              )
+          }
+        if (!error1){
+            getUserData();
+        }
+    }, [username, email, error1]);
     
     return ( 
         <React.Fragment>
