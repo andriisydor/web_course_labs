@@ -12,7 +12,7 @@ function Main() {
     const [playlists, setPlaylists] = useState([]);
     const [error1, setError] = useState(false);
     const [resultMessage, setResultMessage] = useState('');
-    const [limit, setLimit] = useState(10);
+    const [limit] = useState(10);
     // const [offset, setOffset] = useState(0);
     const [page, setPage] = useState(1);
     const [search, setSearch] = useState('');
@@ -98,7 +98,7 @@ function Main() {
         return <h3>No playlists found</h3>
       } else if (!error1){
         const playlistItems = playlists.map((playlist) =>
-          <Object key={playlist.id} name={playlist.title} title={playlist.user.username} />
+          <Object key={playlist.id} link={`/playlist/${playlist.id}`} name={playlist.title} title={playlist.user.username} />
         );
         return playlistItems;
       }
