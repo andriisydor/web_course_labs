@@ -6,6 +6,7 @@ import Error from './Error';
 import Object from './Object';
 import PageNav from './PageNav';
 import Song from './Song';
+import {useParams} from 'react-router-dom';
 
 function Main(props) {
     const [token] = useState(localStorage.getItem('token'));
@@ -19,7 +20,15 @@ function Main(props) {
     const [search, setSearch] = useState('');
     const [searchBeforeSubmit, setSearchBeforeSubmit] = useState('');
 
+    const params = useParams();
+
     let navigate = useNavigate();
+
+    useEffect(() => {
+      console.log('effect');
+      setPage(1);
+      setSearch('');
+    }, [props.service, props.elements])
 
     useEffect(() => {
       const getPlaylists = () => {
@@ -109,11 +118,11 @@ function Main(props) {
     }
 
     const handleButtonClick = (id, playlist) => {
-      console.log(id);
+      navigate(`/choose/${id}`);
     }
 
     const handleChooseClick = (id) => {
-      console.log(id);
+      console.log(params.songId);
     }
 
     const placePlaylistsToChoose = () => {

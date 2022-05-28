@@ -16,7 +16,7 @@ function App() {
           <Route index element={<Main service={'/service/users/'} addId={true} elements={'playlists'} title={'playlists'} />} />
           <Route path="library" element={<Main service={'/service/user/'} addId={true} elements={'playlists'} title={'library'} />} />
           <Route path="songs" element={<Main service={'/songs'} addId={false} elements={'songs'} title={'songs'} />} />
-          <Route path="choose" element={<Main service={'/service/user/'} addId={true} elements={'choose'} title={'choose playlist'} />} />
+          <Route path="choose/:songId" element={<Main service={'/service/user/'} addId={true} elements={'choose'} title={'choose playlist'} />} />
           <Route path="login" element={<Login />} />
           <Route path="create" element={<Create />} />
           <Route path="registration" element={<Registration />} />
