@@ -98,7 +98,7 @@ function Main(props) {
         return <h3>No playlists found</h3>
       } else if (!error1){
         const playlistItems = playlists.map((playlist) =>
-          <Object key={playlist.id} link={`/playlist/${playlist.id}`} name={playlist.title} title={playlist.user.username} />
+          <Object key={playlist.id} link={`/playlist/${playlist.id}`} name={playlist.title} title={playlist.user.username} additional={playlist.private} />
         );
         return playlistItems;
       }

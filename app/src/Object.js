@@ -11,12 +11,22 @@ function Object(props) {
         }
     }
 
+    const additionalText = () => {
+        if ('additional' in props){
+            let value = 'public';
+            if (props.additional){
+                value = 'private';
+            }
+            return ` (${value})`;
+        }
+    }
+
     return ( 
         <div className="object">
             <div className="squarediv"></div>
             <div className="text">
                 {checkIfLink()}
-                <span className="artist"> {props.title} </span>
+                <span className="artist"> {props.title}{additionalText()} </span>
             </div>
         </div>
     );
