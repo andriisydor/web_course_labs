@@ -52,8 +52,8 @@ function Create() {
       <div className="mainpart moveaside">
         <h3></h3>
         <h2>create playlist</h2>
-        {showError()}
         <h3></h3>
+        {showError()}
         <form>
             <input placeholder="title" className="forminput" onChange={handleChangeTitle}></input>
             <input type="checkbox" id="private" name="private" value={true} onChange={handleChangePrivate}></input>

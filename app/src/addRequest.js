@@ -1,16 +1,14 @@
 
-const createPlaylist = (title, user, privatePlaylist, token, setError, setResultMessage, navigate) => {
-    const requestLink ='http://127.0.0.1:5000/playlist';
+const addSongToPlaylist = (songId, playlistId, token, setError, setResultMessage, navigate) => {
+    const requestLink =`http://127.0.0.1:5000/playlist/song/${songId}`;
     fetch(requestLink, {
-        method: 'POST',
+        method: 'PUT',
         headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            title: title,
-            user_id: user,
-            private: privatePlaylist,
+            id: playlistId,
         }),
     })
       .then(res => {
@@ -34,4 +32,4 @@ const createPlaylist = (title, user, privatePlaylist, token, setError, setResult
         )
 }
 
-export default createPlaylist;
+export default addSongToPlaylist;

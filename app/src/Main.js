@@ -7,6 +7,7 @@ import Object from './Object';
 import PageNav from './PageNav';
 import Song from './Song';
 import {useParams} from 'react-router-dom';
+import addSongToPlaylist from './addRequest';
 
 function Main(props) {
     const [token] = useState(localStorage.getItem('token'));
@@ -122,7 +123,7 @@ function Main(props) {
     }
 
     const handleChooseClick = (id) => {
-      console.log(params.songId);
+      addSongToPlaylist(params.songId, id, token, setError, setResultMessage, navigate);
     }
 
     const placePlaylistsToChoose = () => {
@@ -148,12 +149,14 @@ function Main(props) {
     }
 
     const placeElements = () => {
-      if (props.elements === 'songs'){
-        return placeSongs();
-      } else if (props.elements === 'playlists') {
-        return placePlaylists();
-      } else if (props.elements === 'choose') {
-        return placePlaylistsToChoose();
+      if (!error1){
+        if (props.elements === 'songs'){
+          return placeSongs();
+        } else if (props.elements === 'playlists') {
+          return placePlaylists();
+        } else if (props.elements === 'choose') {
+          return placePlaylistsToChoose();
+        }
       }
     }
 
