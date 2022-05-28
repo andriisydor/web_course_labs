@@ -6,7 +6,7 @@ import Error from './Error';
 import Object from './Object';
 import PageNav from './PageNav';
 
-function Main() {
+function Main(props) {
     const [token] = useState(localStorage.getItem('token'));
     const [id] = useState(localStorage.getItem('id'));
     const [playlists, setPlaylists] = useState([]);
@@ -22,11 +22,11 @@ function Main() {
 
     useEffect(() => {
       const getPlaylists = () => {
-        let requestLink =`http://127.0.0.1:5000/service/users/${id}?limit=${limit}&offset=${limit * (page - 1)}`;
+        let requestLink =`http://127.0.0.1:5000/service${props.service}${id}?limit=${limit}&offset=${limit * (page - 1)}`;
         if (search === ''){
-          requestLink =`http://127.0.0.1:5000/service/users/${id}?limit=${limit}&offset=${limit * (page - 1)}`;
+          requestLink =`http://127.0.0.1:5000/service${props.service}${id}?limit=${limit}&offset=${limit * (page - 1)}`;
         } else {
-          requestLink =`http://127.0.0.1:5000/service/users/${id}?limit=${limit}&offset=${limit * (page - 1)}&q=${search}`;
+          requestLink =`http://127.0.0.1:5000/service${props.service}${id}?limit=${limit}&offset=${limit * (page - 1)}&q=${search}`;
         }
 
         fetch(requestLink, {
@@ -61,7 +61,7 @@ function Main() {
       if (!error1){
           getPlaylists();
       }
-    }, [search, page])
+    }, [search, page, props.service])
 
     const showError = () => {
       if (error1) {

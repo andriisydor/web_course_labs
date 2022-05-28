@@ -12,7 +12,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" >
-          <Route index element={<Main />} />
+          <Route index element={<Main service={'/users/'}/>} />
+          <Route path="library" element={<Main service={'/user/'} />} />
           <Route path="login" element={<Login />} />
           <Route path="registration" element={<Registration />} />
           <Route path="edit" element={<Edit />} />
