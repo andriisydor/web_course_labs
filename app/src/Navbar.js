@@ -7,7 +7,7 @@ function Navbar() {
             <Link to="/">PLAYLISTS</Link>
             <Link to="/">SONGS</Link>
             <Link to="/library">LIBRARY</Link>
-            <Link to="/">CREATE PLAYLIST</Link>
+            <Link to="/create">CREATE PLAYLIST</Link>
             <Link to="/login">LOGOUT</Link>
             <Link to="/edit">EDIT ACCOUNT</Link>
         </div>
