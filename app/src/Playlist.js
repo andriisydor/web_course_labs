@@ -3,6 +3,8 @@ import {useParams} from 'react-router-dom';
 import Navbar from './Navbar';
 import { useNavigate } from "react-router-dom";
 import Song from './Song';
+import Error from './Error';
+import deleteSongFromPlaylist from './requests';
 
 function Playlist() {
     const params = useParams();
@@ -11,8 +13,8 @@ function Playlist() {
     const [id] = useState(localStorage.getItem('id'));
     const [error1, setError] = useState(false);
     const [resultMessage, setResultMessage] = useState('');
-    const [playlist, setPlaylist] = useState({'title': '', 'user': {'username': ''}, songs: []});
-    const [changes, setChanges] = useState(0);
+    const [playlist, setPlaylist] = useState({'title': 'Loading...', 'user': {'username': ''}, songs: []});
+    const [changes, setChanges] = useState(false);
 
     let navigate = useNavigate();
 
@@ -26,19 +28,15 @@ function Playlist() {
             },
         })
           .then(res => {
-                console.log(res);
                 if (res.status !== 200) {
-                    console.log('errrooooorrrrrr');
-                    navigate("/");
                     setError(true);
                 }
                 return res.json();
         })
           .then(
             (result) => {
-                console.log(result);
                 if ('message' in result || 'msg' in result){
-                    setResultMessage(result);
+                    setResultMessage({'message': 'Sorry, you can not access this playlist'});
                 } else {
                     if (result !== playlist){
                         setPlaylist(result);
@@ -47,26 +45,45 @@ function Playlist() {
             },
             (error) => {
                 setError(true);
-                setResultMessage(error);
+                setResultMessage({'message': 'Sorry, you can not access this playlist'});
             }
           )
       }
-      console.log('yes');
-      getPlaylist();
       if (!error1){
-          console.log('yes');
+          getPlaylist();
       }
     }, [changes])
+
+    const handleButtonClick = (id, playlist) => {
+      console.log(id);
+      console.log(playlist);
+      deleteSongFromPlaylist(id, playlist, localStorage.getItem('token'), setError, setResultMessage);
+      setChanges(!changes);
+    }
 
     const placeSongs = () => {
       if (!error1 && playlist.songs.length === 0){
         return <h3>Playlist is empty!</h3>
       } else if (!error1){
         const playlistItems = playlist.songs.map((song) =>
-          <Song key={song.id} img={song.photo} button="-" name={song.name} artist={song.singer} time={song.duration} />
+          <Song key={song.id} id={song.id} playlistId={playlist.id} img={song.photo} button="-" name={song.name} artist={song.singer} time={song.duration} handleButtonClick={handleButtonClick} />
         );
         return playlistItems;
       }
+    }
+
+    const handleCloseClick = () => {
+      setError(false);
+      setResultMessage('');
+      if (resultMessage.message === 'Sorry, you can not access this playlist'){
+        navigate('/');
+      }
+    }
+
+    const showError = () => {
+      if (error1) {
+          return(<Error handleCloseClick={handleCloseClick} message={resultMessage.message}/>);
+      } 
     }
 
     return (
@@ -74,7 +91,8 @@ function Playlist() {
       <Navbar />
       <div className="mainpart moveaside">
         <h2>{playlist.title}</h2>
-        <h3>author: {playlist.user.username}</h3>
+        <h3>{playlist.user.username}</h3>
+        {showError()}
         <div className="objectholder">
           {placeSongs()}
         </div>

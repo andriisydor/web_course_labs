@@ -9,7 +9,7 @@ function Song(props) {
                 <span className="artist"> {props.artist} </span>
                 <span className="time"> {props.time} </span>
             </div>
-            <button className="squarebutton">{props.button}</button>
+            <button className="squarebutton" onClick={() => {props.handleButtonClick(props.id, props.playlistId)}}>{props.button}</button>
         </div>
     );
 }
