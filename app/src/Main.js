@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Error from './Error';
 import Object from './Object';
 import PageNav from './PageNav';
+import Song from './Song';
 
 function Main(props) {
     const [token] = useState(localStorage.getItem('token'));
@@ -12,7 +13,7 @@ function Main(props) {
     const [playlists, setPlaylists] = useState([]);
     const [error1, setError] = useState(false);
     const [resultMessage, setResultMessage] = useState('');
-    const [limit] = useState(10);
+    const [limit] = useState(3);
     // const [offset, setOffset] = useState(0);
     const [page, setPage] = useState(1);
     const [search, setSearch] = useState('');
@@ -22,11 +23,14 @@ function Main(props) {
 
     useEffect(() => {
       const getPlaylists = () => {
-        let requestLink =`http://127.0.0.1:5000/service${props.service}${id}?limit=${limit}&offset=${limit * (page - 1)}`;
+        let requestLink =`http://127.0.0.1:5000${props.service}`;
+        if (props.addId){
+          requestLink += `${id}`;
+        }
         if (search === ''){
-          requestLink =`http://127.0.0.1:5000/service${props.service}${id}?limit=${limit}&offset=${limit * (page - 1)}`;
+          requestLink += `?limit=${limit}&offset=${limit * (page - 1)}`;
         } else {
-          requestLink =`http://127.0.0.1:5000/service${props.service}${id}?limit=${limit}&offset=${limit * (page - 1)}&q=${search}`;
+          requestLink += `?limit=${limit}&offset=${limit * (page - 1)}&q=${search}`;
         }
 
         fetch(requestLink, {
@@ -94,13 +98,53 @@ function Main(props) {
     }
 
     const placePlaylists = () => {
-      if (!error1 && playlists.length === 0){
+      if ((!error1 && playlists.length === 0) || !('user' in playlists[0])){
         return <h3>No playlists found</h3>
       } else if (!error1){
         const playlistItems = playlists.map((playlist) =>
           <Object key={playlist.id} link={`/playlist/${playlist.id}`} name={playlist.title} title={playlist.user.username} additional={playlist.private} />
         );
         return playlistItems;
+      }
+    }
+
+    const handleButtonClick = (id, playlist) => {
+      console.log(id);
+    }
+
+    const handleChooseClick = (id) => {
+      console.log(id);
+    }
+
+    const placePlaylistsToChoose = () => {
+      if ((!error1 && playlists.length === 0) || !('user' in playlists[0])){
+        return <h3>No playlists found</h3>
+      } else if (!error1){
+        const playlistItems = playlists.map((playlist) =>
+          <Object key={playlist.id} handleChooseClick={handleChooseClick} playlistId={playlist.id} name={playlist.title} title={playlist.user.username} additional={playlist.private} />
+        );
+        return playlistItems;
+      }
+    }
+
+    const placeSongs = () => {
+      if ((!error1 && playlists.length === 0) || ('user' in playlists[0])){
+        return <h3>No songs found</h3>
+      } else if (!error1){
+        const playlistItems = playlists.map((song) =>
+          <Song key={song.id} id={song.id} img={song.photo} playlistId={-1} button="+" name={song.name} artist={song.singer} time={song.duration} handleButtonClick={handleButtonClick} />
+        );
+        return playlistItems;
+      }
+    }
+
+    const placeElements = () => {
+      if (props.elements === 'songs'){
+        return placeSongs();
+      } else if (props.elements === 'playlists') {
+        return placePlaylists();
+      } else if (props.elements === 'choose') {
+        return placePlaylistsToChoose();
       }
     }
 
@@ -111,7 +155,7 @@ function Main(props) {
     <React.Fragment>
       <Navbar />
       <div className="mainpart moveaside">
-        <h1>playlists</h1>
+        <h1>{props.title}</h1>
         {showError()}
         <div className="alert"></div>
         <form className="search-form">
@@ -119,7 +163,7 @@ function Main(props) {
           <button className="search-button" onClick={handleSearch} type="button">&#x3e;</button>
         </form>
         <div className="objectholder">
-          {placePlaylists()}
+          {placeElements()}
         </div>
         <PageNav number={playlists.length} limit={limit} page={page} handlePrev={handlePrev} handleNext={handleNext}/>
       </div>

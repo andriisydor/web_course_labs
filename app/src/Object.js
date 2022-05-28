@@ -6,6 +6,8 @@ function Object(props) {
     const checkIfLink = () => {
         if ('link' in props){
             return (<Link to={props.link}><span className="name"> {props.name} </span></Link>);
+        } else if ('handleChooseClick' in props){
+            return (<span className="name choose" onClick={() => {props.handleChooseClick(props.playlistId)}}> {props.name} </span>);
         } else{
             return (<span className="name"> {props.name} </span>);
         }

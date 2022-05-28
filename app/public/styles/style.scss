@@ -48,6 +48,11 @@ html {
   .moveaside {
     margin-left: 200px;
   }
+
+  .choose {
+    cursor: pointer;
+    background-color: $special;
+  }
   
   .mainpart {
     a {

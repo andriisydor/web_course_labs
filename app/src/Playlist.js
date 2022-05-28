@@ -55,8 +55,6 @@ function Playlist() {
     }, [changes])
 
     const handleButtonClick = (id, playlist) => {
-      console.log(id);
-      console.log(playlist);
       deleteSongFromPlaylist(id, playlist, localStorage.getItem('token'), setError, setResultMessage);
       setChanges(!changes);
     }
