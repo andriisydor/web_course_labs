@@ -3,6 +3,7 @@ import Navbar from './Navbar';
 import Object from './Object';
 import { useNavigate } from "react-router-dom";
 import Error from './Error';
+import Success from './Success';
 
 function Admin() {
     const [error1, setError] = useState(false);
@@ -13,6 +14,7 @@ function Admin() {
     const [album, setAlbum] = useState('');
     const [duration, setDuration] = useState('');
     const [photo, setPhoto] = useState('');
+    const [success, setSuccess] = useState(false);
 
     const [songId, setSongId] = useState(-1);
 
@@ -69,6 +71,7 @@ function Admin() {
                     setError(true);
                 } else {
                     setError(false);
+                    setSuccess(true);
                 }
                 return res.json();
         })
@@ -96,6 +99,9 @@ function Admin() {
                 if (res.status !== 200) {
                     setError(true);
                     return res.json();
+                } else{
+                    setSuccess(true);
+                    return res.json();
                 }
         })
           .then(
@@ -113,6 +119,7 @@ function Admin() {
 
     const handleCloseClick = () => {
         setError(false);
+        setSuccess(false);
         setResultMessage('');
     }
 
@@ -122,12 +129,19 @@ function Admin() {
         } 
     }
     
+    const showSuccess = () => {
+        if (success) {
+            return(<Success handleCloseClick={handleCloseClick} message={resultMessage.message}/>);
+        } 
+    }
+
     return ( 
         <React.Fragment>
         <Navbar />
         <div className="mainpart moveaside">
             <h1>admin</h1>
             {showError()}
+            {showSuccess()}
             <div className="objectholder">
                 <h3>-------------------</h3>
                 <h3>add song</h3>
