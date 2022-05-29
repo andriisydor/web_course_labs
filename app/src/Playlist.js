@@ -84,6 +84,23 @@ function Playlist() {
       } 
     }
 
+    const handleDeleteAttepmt = (userId, playlistId) => {
+      console.log('delete');
+      console.log(userId);
+      console.log(playlistId);
+    }
+
+    const placeDeleteButton = () => {
+      console.log(id);
+      console.log(playlist.user_id);
+      if (!error1 && 'user' in playlist && 'user_id' in playlist && 'id' in playlist && parseInt(id) === playlist.user_id) {
+          return(
+            <input onClick={() => {handleDeleteAttepmt(parseInt(id), playlist.id)}} style={{marginBottom: '15px'}} className="enter" type="button" value="delete">
+            </input>
+          );
+      } 
+    }
+
     return (
     <React.Fragment>
       <Navbar />
@@ -91,6 +108,7 @@ function Playlist() {
         <h2>{playlist.title}</h2>
         <h3>{playlist.user.username}</h3>
         {showError()}
+        {placeDeleteButton()}
         <div className="objectholder">
           {placeSongs()}
         </div>
