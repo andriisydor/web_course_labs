@@ -180,7 +180,7 @@ function Main(props) {
         <div className="alert"></div>
         <form className="search-form">
           <input className="search" onChange={handleSearchChange} type="text" placeholder="search..." name="search"></input>
-          <button className="search-button" onClick={handleSearch} type="button">&#x3e;</button>
+          <button className="search-button" onClick={handleSearch} type="button" style={{cursor: 'pointer'}}>&#x3e;</button>
         </form>
         {showSearchInfo()}
         <div className="objectholder">
