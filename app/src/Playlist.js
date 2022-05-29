@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Song from './Song';
 import Error from './Error';
 import deleteSongFromPlaylist from './requests';
+import deletePlaylist from './deleteRequest';
 
 function Playlist() {
     const params = useParams();
@@ -84,18 +85,14 @@ function Playlist() {
       } 
     }
 
-    const handleDeleteAttepmt = (userId, playlistId) => {
-      console.log('delete');
-      console.log(userId);
-      console.log(playlistId);
+    const handleDeleteAttepmt = (playlistId) => {
+      deletePlaylist(playlistId, token, setError, setResultMessage, navigate);
     }
 
     const placeDeleteButton = () => {
-      console.log(id);
-      console.log(playlist.user_id);
       if (!error1 && 'user' in playlist && 'user_id' in playlist && 'id' in playlist && parseInt(id) === playlist.user_id) {
           return(
-            <input onClick={() => {handleDeleteAttepmt(parseInt(id), playlist.id)}} style={{marginBottom: '15px'}} className="enter" type="button" value="delete">
+            <input onClick={() => {handleDeleteAttepmt(playlist.id)}} style={{marginBottom: '15px'}} className="enter" type="button" value="delete">
             </input>
           );
       } 
