@@ -7,6 +7,7 @@ import Registration from './Registration';
 import Edit from './Edit';
 import Playlist from './Playlist';
 import Create from './Create';
+import Admin from './Admin';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="registration" element={<Registration />} />
           <Route path="edit" element={<Edit />} />
           <Route path="playlist/:playlistId" element={<Playlist />} />
+          <Route path="admin" element={<Admin />} />
         </Route>
       </Routes>
   </BrowserRouter>
