@@ -88,6 +88,14 @@ function Main(props) {
       setResultMessage('');
     }
 
+    const showSearchInfo = () => {
+      if (search !== ''){
+        return(
+          <span style={{color: 'white', textAlign: 'center', display: 'block'}}>search results on query "{search}":</span>
+        );
+      }
+    }
+
     const handleSearchChange = (event) => {
       setSearchBeforeSubmit(event.target.value);
     }
@@ -174,6 +182,7 @@ function Main(props) {
           <input className="search" onChange={handleSearchChange} type="text" placeholder="search..." name="search"></input>
           <button className="search-button" onClick={handleSearch} type="button">&#x3e;</button>
         </form>
+        {showSearchInfo()}
         <div className="objectholder">
           {placeElements()}
         </div>
