@@ -42,6 +42,11 @@ body {
   margin-left: 200px;
 }
 
+.choose {
+  cursor: pointer;
+  background-color: #B6CDB1;
+}
+
 .mainpart a {
   text-decoration: none;
 }
