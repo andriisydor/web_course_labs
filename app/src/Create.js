@@ -31,8 +31,6 @@ function Create() {
             pp = true;
         }
         createPlaylist(title, localStorage.getItem('id'), pp, localStorage.getItem('token'), setError, setResultMessage, navigate);
-        console.log(title);
-        console.log(privatePlaylist);
     }
 
     const handleCloseClick = () => {

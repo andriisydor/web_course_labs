@@ -26,7 +26,6 @@ function Main(props) {
     let navigate = useNavigate();
 
     useEffect(() => {
-      console.log('effect');
       setPage(1);
       setSearch('');
     }, [props.service, props.elements])
