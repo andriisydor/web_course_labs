@@ -18,3 +18,7 @@ to start application:
   - npm install
   - npm start
 (don't forget to run back-end back-end github repository: https://github.com/andriisydor/pp)
+
+# branch lab_4
+add project specific functionality to SPA
+to start application: the same as lab_3
