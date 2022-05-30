@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
-import Object from './Object';
+import Object1 from './Object';
 import { useNavigate } from "react-router-dom";
 import Error from './Error';
 
@@ -162,7 +162,7 @@ function Edit() {
             <h1>editing</h1>
             {showError()}
             <div className="objectholder">
-                <Object name={'username: ' + username} title = {'email: ' + email}/>
+                <Object1 name={'username: ' + username} title = {'email: ' + email}/>
                 <form>
                     <input placeholder="username" className="forminput" onChange={handleChangeUsername}></input>
                     <input placeholder="email" className="forminput" onChange={handleChangeEmail}></input>

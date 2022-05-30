@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
-import Object from './Object';
 import { useNavigate } from "react-router-dom";
 import Error from './Error';
 import Success from './Success';

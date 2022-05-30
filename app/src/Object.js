@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Object(props) {
+function Object1(props) {
 
     const checkIfLink = () => {
         if ('link' in props){
@@ -34,4 +34,4 @@ function Object(props) {
     );
 }
 
-export default Object;
+export default Object1;
