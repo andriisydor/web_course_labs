@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import Object1 from '../Object';
 import { BrowserRouter } from "react-router-dom";
 
-test('renders object function', () => {
+test('tests object function', () => {
   render(<Object1 name="theName" title="title" link="/library"/>, {wrapper: BrowserRouter});
   expect(screen.getByText(/theName/).closest('a')).toHaveAttribute('href', '/library');
 
