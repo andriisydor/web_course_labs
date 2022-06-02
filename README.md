@@ -22,3 +22,9 @@ to start application:
 # branch lab_4
 add project specific functionality to SPA
 to start application: the same as lab_3
+
+# branch lab_4
+test for app
+  - cd web_course_labs/app
+  - npm install
+  - npm test -- --coverage --watchAll=false
