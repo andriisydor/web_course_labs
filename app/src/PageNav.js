@@ -5,7 +5,7 @@ function PageNav(props) {
     const showNextButton = () => {
         if (props.limit === props.number){
             return (
-                <button className="navigationbutton" onClick={props.handleNext} style={{cursor: 'pointer'}}>&#62;</button>
+                <button aria-label='next-button' className="navigationbutton" onClick={props.handleNext} style={{cursor: 'pointer'}}>&#62;</button>
             );
         }
     }

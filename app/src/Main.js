@@ -3,7 +3,7 @@ import Navbar from './Navbar';
 import  { Navigate } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import Error from './Error';
-import Object from './Object';
+import Object1 from './Object';
 import PageNav from './PageNav';
 import Song from './Song';
 import {useParams} from 'react-router-dom';
@@ -119,7 +119,7 @@ function Main(props) {
         return <h3>No playlists found</h3>
       } else if (!error1){
         const playlistItems = playlists.map((playlist) =>
-          <Object key={playlist.id} link={`/playlist/${playlist.id}`} name={playlist.title} title={playlist.user.username} additional={playlist.private} />
+          <Object1 key={playlist.id} link={`/playlist/${playlist.id}`} name={playlist.title} title={playlist.user.username} additional={playlist.private} />
         );
         return playlistItems;
       }
@@ -138,7 +138,7 @@ function Main(props) {
         return <h3>No playlists found</h3>
       } else if (!error1){
         const playlistItems = playlists.map((playlist) =>
-          <Object key={playlist.id} handleChooseClick={handleChooseClick} playlistId={playlist.id} name={playlist.title} title={playlist.user.username} additional={playlist.private} />
+          <Object1 key={playlist.id} handleChooseClick={handleChooseClick} playlistId={playlist.id} name={playlist.title} title={playlist.user.username} additional={playlist.private} />
         );
         return playlistItems;
       }
