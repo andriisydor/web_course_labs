@@ -93,3 +93,26 @@ test('tests create error', async() => {
   expect(screen.queryByText(/msg/i)).toBeNull();
 });
 
+test('tests create with error with throwing', async() => {
+
+  jest.spyOn(global, 'fetch').mockResolvedValue({
+    json: jest.fn(() => {throw new Error('123msg');}),
+    status: 400,
+  })
+
+  render(<MemoryRouter>
+                        <Routes>
+                            <Route index element={<Create />} />
+                            <Route path="playlist/:playlistId" element={<Playlist />} />
+                        </Routes>
+                    </MemoryRouter>);
+
+  const input = screen.getByPlaceholderText(/title/i);
+  fireEvent.change(input, {target: {value: 'query'}});
+
+  const formButton = screen.getByRole('button');
+  userEvent.click(formButton);
+  const itemPublic = await screen.findByText(/123msg/i);
+  expect(itemPublic).toBeInTheDocument();
+});
+
