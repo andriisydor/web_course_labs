@@ -1,9 +1,18 @@
 import React from 'react';
 
 function Song(props) {
+
+    const placeImage = () => {
+        if ('handlePlayer' in props){
+            return(<img src={props.img} alt="img" onClick={() => {props.handlePlayer(props.song)}} style={{cursor: 'pointer'}}></img>);
+        } else {
+            return(<img src={props.img} alt="img"></img>);
+        }
+    }
+
     return (
         <div className="object">
-            <img src={props.img} alt="img"></img>
+            {placeImage()}
             <div className="text">
                 <span className="name"> {props.name} </span>
                 <span className="artist"> {props.artist} </span>
