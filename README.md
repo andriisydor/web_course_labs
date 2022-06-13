@@ -28,3 +28,6 @@ test for app
   - cd web_course_labs/app
   - npm install
   - npm test -- --coverage --watchAll=false
+
+# branch global_update
+added additional demo funtional(no stable version)
