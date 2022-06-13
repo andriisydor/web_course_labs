@@ -10,6 +10,7 @@ import Create from './Create';
 import Admin from './Admin';
 import Player from './Player';
 import Analyze from './Analyze';
+import Settings from './Settings';
 
 function App() {
   const [currentSong, setCurrentSong] = useState({photo: '', name: 'loaging', artist: 'loading', time: 'loading'});
@@ -38,6 +39,7 @@ function App() {
           <Route path="playlist/:playlistId" element={<Playlist handlePlayer={handlePlayer}/>} />
           <Route path="admin" element={<Admin />} />
           <Route path="analyze/song/:songId" element={<Analyze />} />
+          <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>
       <Player token={localStorage.getItem('token')} song={currentSong} visibility={visibility} update={update}/>

@@ -7,7 +7,6 @@ function Analyze() {
         <React.Fragment>
             <Navbar />
             <div className="mainpart moveaside" style={{textAlign: 'center'}}>
-                <h3></h3>
                 <h2>analyze song</h2>
                 <h3 style={{color: 'red'}}>demo</h3>
                 <h3>spectrogram</h3>
