@@ -1,6 +1,9 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 
 function Song(props) {
+
+    let navigate = useNavigate();
 
     const placeImage = () => {
         if ('handlePlayer' in props){
@@ -14,7 +17,7 @@ function Song(props) {
         <div className="object">
             {placeImage()}
             <div className="text">
-                <span className="name"> {props.name} </span>
+                <span className="name" style={{cursor: 'pointer'}} onClick={() => {navigate(`/analyze/song/${props.id}`);}}> {props.name} </span>
                 <span className="artist"> {props.artist} </span>
                 <span className="time"> {props.time} </span>
             </div>
