@@ -30,4 +30,4 @@ test for app
   - npm test -- --coverage --watchAll=false
 
 # branch global_update
-added additional demo funtional(no stable version)
+added additional demo funtional(not stable version)
