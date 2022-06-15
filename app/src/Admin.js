@@ -3,10 +3,13 @@ import Navbar from './Navbar';
 import { useNavigate } from "react-router-dom";
 import Error from './Error';
 import Success from './Success';
+import  { Navigate } from 'react-router-dom';
 
 function Admin() {
     const [error1, setError] = useState(false);
     const [resultMessage, setResultMessage] = useState('');
+    const [token] = useState(localStorage.getItem('token'));
+    const [id] = useState(localStorage.getItem('id'));
 
     const [name, setName] = useState('');
     const [singer, setSinger] = useState('');
@@ -132,6 +135,10 @@ function Admin() {
         if (success) {
             return(<Success handleCloseClick={handleCloseClick} message={resultMessage.message}/>);
         } 
+    }
+
+    if (token == null || id != 18) {
+        return <Navigate to='/' />;
     }
 
     return ( 
