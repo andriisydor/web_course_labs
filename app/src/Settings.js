@@ -11,7 +11,7 @@ function Settings() {
 
     const placeDevices = () =>{
         const menuItems = devices.map((thing) =>
-            <span onClick={() => {handleDeviceClick(thing)}}>{thing}</span>
+            <span onClick={() => {handleDeviceClick(thing)}} style={{fontSize: '3vw'}}>{thing}</span>
         );
         return(
             <React.Fragment>
