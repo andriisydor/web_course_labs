@@ -8,6 +8,7 @@ import PageNav from './PageNav';
 import Song from './Song';
 import {useParams} from 'react-router-dom';
 import addSongToPlaylist from './addRequest';
+import Player from './Player';
 
 function Main(props) {
     const [token] = useState(localStorage.getItem('token'));
@@ -15,7 +16,7 @@ function Main(props) {
     const [playlists, setPlaylists] = useState([]);
     const [error1, setError] = useState(false);
     const [resultMessage, setResultMessage] = useState('');
-    const [limit] = useState(3);
+    const [limit] = useState(8);
     // const [offset, setOffset] = useState(0);
     const [page, setPage] = useState(1);
     const [search, setSearch] = useState('');

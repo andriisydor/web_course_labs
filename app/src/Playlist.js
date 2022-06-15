@@ -7,7 +7,7 @@ import Error from './Error';
 import deleteSongFromPlaylist from './requests';
 import deletePlaylist from './deleteRequest';
 
-function Playlist() {
+function Playlist(props) {
     const params = useParams();
 
     const [token] = useState(localStorage.getItem('token'));
@@ -65,7 +65,7 @@ function Playlist() {
         return <h3>Playlist is empty!</h3>
       } else if (!error1){
         const playlistItems = playlist.songs.map((song) =>
-          <Song key={song.id} id={song.id} playlistId={playlist.id} img={song.photo} button="-" name={song.name} artist={song.singer} time={song.duration} handleButtonClick={handleButtonClick} />
+          <Song key={song.id} id={song.id} playlistId={playlist.id} img={song.photo} button="-" name={song.name} artist={song.singer} time={song.duration} handleButtonClick={handleButtonClick} handlePlayer={props.handlePlayer} song={song} />
         );
         return playlistItems;
       }
