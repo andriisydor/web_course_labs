@@ -24,6 +24,13 @@ function App() {
     setUpdate(!update);
   }
 
+  const handleClose = () => {
+    localStorage.removeItem('song');
+    setCurrentSong({photo: '', name: 'loaging', artist: 'loading', time: 'loading'});
+    setVisibility('none');
+    setUpdate(!update);
+  }
+
   return (
     <BrowserRouter>
       <Routes>
@@ -42,7 +49,7 @@ function App() {
           <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>
-      <Player token={localStorage.getItem('token')} song={currentSong} visibility={visibility} update={update}/>
+      <Player token={localStorage.getItem('token')} song={currentSong} visibility={visibility} update={update} close={handleClose}/>
   </BrowserRouter>
   );
 }

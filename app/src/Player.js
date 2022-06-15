@@ -13,6 +13,9 @@ function Player(props) {
                         <span className="artist" style={{display: 'block'}}> {props.song.singer} </span>
                         <span className="time" style={{display: 'block'}}> {props.song.duration} </span>
                     </div>
+                    <div style={{verticalAlign: 'middle', paddingLeft: '10px', display: 'inline-block', float: 'right'}}>
+                        <span className="closebtn" style={{display: 'inline-block', verticalAlign: 'middle'}} onClick={props.close}>&times;</span>
+                    </div>
                 </div>
             );
         }
