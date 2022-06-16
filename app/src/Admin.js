@@ -16,6 +16,7 @@ function Admin() {
     const [album, setAlbum] = useState('');
     const [duration, setDuration] = useState('');
     const [photo, setPhoto] = useState('');
+    const [lyrics, setLyrics] = useState('');
     const [success, setSuccess] = useState(false);
 
     const [songId, setSongId] = useState(-1);
@@ -42,6 +43,10 @@ function Admin() {
         setPhoto(event.target.value);
     }
 
+    const handleChangeLyrics = (event) => {
+        setLyrics(event.target.value);
+    }
+
     const handleChangeId = (event) => {
         setSongId(event.target.value);
     }
@@ -55,6 +60,9 @@ function Admin() {
         };
         if (photo !== ''){
             result.photo = photo;
+        }
+        if (lyrics !== ''){
+            result.lyrics = lyrics;
         }
         return JSON.stringify(result);
     }
@@ -157,6 +165,7 @@ function Admin() {
                     <input placeholder="album" className="forminput" onChange={handleChangeAlbum}></input>
                     <input placeholder="duration" className="forminput" onChange={handleChangeDuration}></input>
                     <input placeholder="photo" className="forminput" onChange={handleChangePhoto}></input>
+                    <input placeholder="lyrics" className="forminput" onChange={handleChangeLyrics} style={{whiteSpace: 'pre'}}></input>
                     <input onClick={handleCreateAttempt} className="enter" type="button" value="create"></input>
                 </form>
                 <h3></h3>

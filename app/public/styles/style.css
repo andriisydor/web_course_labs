@@ -379,6 +379,14 @@ body {
   margin-left: 20px;
 }
 
+.lyrics {
+  height: 60px;
+  max-width: 40%;
+  vertical-align: middle;
+  padding-left: 10px;
+  overflow-y: scroll;
+}
+
 @media screen and (max-width: 700px) {
   .sidebar {
     width: 100%;
@@ -408,6 +416,9 @@ body {
   .search-form {
     width: 100%;
     max-width: none;
+  }
+  .lyrics {
+    display: none;
   }
 }
 
